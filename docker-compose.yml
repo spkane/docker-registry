@@ -1,8 +1,7 @@
-version: "2"
 services:
   registry:
     container_name: class_registry
-    image: registry:2.6.2
+    image: registry:2.7
     restart: unless-stopped
     networks:
       - my-net
@@ -17,6 +16,21 @@ services:
      - "./files/htpasswd:/htpasswd"
      - "./data:/var/lib/registry"
      - "./certs:/certs"
+  ui:
+    container_name: class_registry_ui
+    image: joxit/docker-registry-ui:latest
+    restart: unless-stopped
+    networks:
+      - my-net
+    ports:
+      - "8080:80"
+    environment:
+      DELETE_IMAGES: "false"
+      REGISTRY_TITLE: "My Private Registry"
+      REGISTRY_URL: "https://127.0.0.1:5000"
+      SINGLE_REGISTRY: "true"
+    depends_on:
+      - registry
 networks:
   my-net:
     driver: bridge
