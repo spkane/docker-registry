@@ -25,9 +25,9 @@ services:
     ports:
       - "8080:80"
     environment:
-      DELETE_IMAGES: "false"
+      DELETE_IMAGES: "true"
+      NGINX_PROXY_PASS_URL: "https://registry:5000"
       REGISTRY_TITLE: "My Private Registry"
-      REGISTRY_URL: "https://127.0.0.1:5000"
       SINGLE_REGISTRY: "true"
     depends_on:
       - registry
