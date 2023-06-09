@@ -1,7 +1,7 @@
 services:
   registry:
     container_name: class_registry
-    image: registry:2.7
+    image: registry:2.8.2
     restart: unless-stopped
     networks:
       - my-net
